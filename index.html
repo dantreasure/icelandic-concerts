@@ -15,6 +15,7 @@
 			<ul>
 				<li class="concert" ng-repeat="concert in concerts.data.results">
 					<p class="title">{{concert.eventDateName}}</p>
+					<img class="image" ng-src="{{concert.imageSource}}" alt="">
 				</li>
 			</ul>
 		</div>

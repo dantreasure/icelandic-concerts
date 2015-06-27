@@ -2,8 +2,10 @@ describe('icelandic concerts exercise', function() {
 	var concerts = element.all(by.repeater('concert in concerts'));
 	var concertElements = element.all(by.css('.concert'));
 	var concertTitles = element.all(by.css('.title'));
+	var concertImages = element.all(by.css('.image'));
 	var concertCount;
 	var titleCount = 0;
+	var concertImagesCount;
 	var beforeCounter = 0;
 
 	beforeEach(function() {
@@ -13,10 +15,14 @@ describe('icelandic concerts exercise', function() {
     	concertCount = ret;
     });
 
+    concertImages.count().then(function(ret){
+    	concertImagesCount = ret;
+    });
+
     if(beforeCounter == 0){
     	concertTitles.each(function(concertTitle, index) {
 			  concertTitle.getText().then(function (text) {
-			    if(text.length > 0 && text typeof == 'string'){
+			    if(text.length > 0 && typeof text == 'string'){
 			    	titleCount++;
 			    }
 			  });
@@ -29,8 +35,6 @@ describe('icelandic concerts exercise', function() {
   	expect(concerts.count()).toBeGreaterThan(0);
   });
 
-  //Test that the number of individual concert elements, is equal
-	//to the total of elements from the ng-repeat
   it('should have an element for each concert', function(){
   	expect(concerts.count()).toBe(concertElements.count());
   });
@@ -40,6 +44,6 @@ describe('icelandic concerts exercise', function() {
   });
 
   it('should have the concert image', function(){
-
+  	expect(concertImagesCount).toBe(concertCount);
   });
 });
